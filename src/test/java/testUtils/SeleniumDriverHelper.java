@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-import static testUtils.ElementHelper.getTextFromElement;
 import static testUtils.SystemPropertyHelper.isTeardown;
 
 public class SeleniumDriverHelper {
@@ -28,6 +27,7 @@ public class SeleniumDriverHelper {
         public static void waitForAjax(long maximumWaitMiliseconds, boolean doubleCheckAjaxRequest) {
             WebDriver driver = DriverManager.getDriver();
             long endTime = System.currentTimeMillis() + maximumWaitMiliseconds;
+            checkModalPresent();
 
             while (true) {
                 long currentTime = System.currentTimeMillis();
@@ -69,6 +69,7 @@ public class SeleniumDriverHelper {
 
         public static void waitForPageLoad() {
             WebDriver driver = DriverManager.getDriver();
+            checkModalPresent();
             WebDriverWait wait = new WebDriverWait(driver, 3000);
 
             Predicate<WebDriver> pageLoaded = input -> ((JavascriptExecutor) input).executeScript("return document.readyState").equals("complete");
@@ -254,6 +255,7 @@ public class SeleniumDriverHelper {
 
         public static void waitUntilPresenceOfElementLocated(By by, long time) {
             WebDriver driver = DriverManager.getDriver();
+            checkModalPresent();
             new WebDriverWait(driver, time).
                     until(ExpectedConditions.presenceOfElementLocated(by));
         }
@@ -354,7 +356,7 @@ public class SeleniumDriverHelper {
 
         public static String getTextByXpath(String locator) {
             waitUntilPresenceOfElementLocatedByXpath(locator, 75);
-            return getTextFromElement(findElementByXpath(locator));
+            return ElementHelper.getTextFromElement(findElementByXpath(locator));
         }
 
         private static void performAction(Action action) {
@@ -370,4 +372,16 @@ public class SeleniumDriverHelper {
         public static void clickAndHoldSendKeysEnter() {
             performAction(getActions().clickAndHold().release().sendKeys(Keys.ENTER).build());
         }
+
+        private static void checkModalPresent() {
+
+           if(isElementPresent(By.cssSelector("#fsrFocusFirst")))
+           {
+               //waitForAjax(500);
+               clickElementUsingJs(findElementByCss("#fsrFocusFirst"));
+           }
+        }
+
+
+
     }

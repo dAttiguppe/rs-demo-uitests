@@ -12,35 +12,40 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import rs.com.search.common.FillSecureData;
-import rs.com.search.common.PriceCalculations;
-import rs.com.search.common.QuantityUpdate;
-import rs.com.search.filter.FilterTypes;
-import rs.com.search.menu.PrimaryNavContainer;
-import rs.com.search.pages.*;
-import rs.com.search.pojo.SecrurePageData;
-import rs.com.search.searchBar.SecureCheckoutPage;
-import rs.com.search.searchProduct.PopularProducts;
-import rs.com.search.searchProduct.ProductDetailsPage;
-import rs.com.search.searchProduct.SearchProduct;
-import testDataConstants.TestConstants;
+import org.openqa.selenium.support.PageFactory;
+import rs.com.common.FillSecureData;
+import rs.com.common.PriceCalculations;
+import rs.com.common.QuantityUpdate;
+import rs.com.common.SecureCheckoutPage;
+import rs.com.filter.FilterTypes;
+import rs.com.login.GuestLogin;
+import rs.com.menu.PrimaryNavContainer;
+import rs.com.pages.*;
+import rs.com.pojo.SecrurePageData;
+import rs.com.search_product.PopularProducts;
+import rs.com.search_product.ProductDetailsPage;
+import rs.com.search_product.SearchProduct;
+import rs.com.switchView.SwitchView;
+import rs.com.testDataConstants.TestConstants;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 import testUtils.DriverManager;
 import testUtils.JsonHelper;
-import testUtils.MyPageFactory;
-import testUtils.SeleniumDriverHelper;
 
 import java.util.List;
 import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 import static org.junit.Assume.assumeTrue;
-import static rs.com.search.common.QuantityUpdate.getQtyUpdateLink;
-import static rs.com.search.filter.FilterTypes.checkAppliedFilterListMatchResults;
-import static rs.com.search.filter.FilterTypes.isFilterSectionPresent;
-import static rs.com.search.pages.GuestLogin.clickGuestLoginBtn;
-import static rs.com.search.searchBar.SecureCheckoutPage.isCheckPageHeaderPresent;
-import static rs.com.search.searchProduct.PopularProducts.isProductAddedToBasket;
-import static testDataConstants.TestConstants.*;
+import static rs.com.common.QuantityUpdate.getQtyUpdateLink;
+import static rs.com.common.SecureCheckoutPage.isCheckPageHeaderPresent;
+import static rs.com.compare_products.CompareProducts.*;
+import static rs.com.filter.FilterTypes.checkAppliedFilterListMatchResults;
+import static rs.com.filter.FilterTypes.isFilterSectionPresent;
+import static rs.com.login.GuestLogin.clickGuestLoginBtn;
+import static rs.com.search_product.PopularProducts.isProductAddedToBasket;
+import static rs.com.switchView.SwitchView.*;
+import static rs.com.testDataConstants.TestConstants.*;
 import static testUtils.DriverManager.embedScreenshot;
 import static testUtils.DriverManager.embedScreenshotIfFailed;
 import static testUtils.SeleniumDriverHelper.*;
@@ -52,16 +57,15 @@ public class StepDefinition {
     private static double basketAmt;
     private static double goodsTotalPrice;
 
-    public StepDefinition() throws IllegalAccessException {
-        this.driver = driver;
-        MyPageFactory.initElements(DriverManager.getDriver(), this);
+    public StepDefinition(){
+        PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(DriverManager.getDriver())),
+                this);
       }
 
     @Before
     public void initTest() throws Exception {
         initialize();
         DriverManager.getDriver().get(WEBSITE_URL);
-        checkAlertPresentAndDismiss();
     }
 
     @AfterStep
@@ -156,20 +160,11 @@ public class StepDefinition {
             GuestLogin continueAsAGuest = new GuestLogin();
             if(continueAsAGuest.getGuestLoginModal())
             {
-                SeleniumDriverHelper.checkAlertPresentAndAccept();
-               // updateQuantity();
                 waitForAjax(5000);
-
-                checkIfPopUp();
-
-//                continueAsAGuest.getEmailIDField().click();
-//                waitForAjax(1000);
-//                continueAsAGuest.getEmailIDField().sendKeys("test@rscomponents.com");
                 findElementByXpath("//*[@id=\"guestCheckoutForm:GuestWidgetAction_emailAddress_decorate:GuestWidgetAction_emailAddress\"]").
                         sendKeys(TEST_EMAILID);
                 waitForAjax(1000);
 
-                checkAlertPresentAndDismiss();
                 waitForAjax(2000);
                 clickGuestLoginBtn().click();
                 waitForAjax(2000);
@@ -214,20 +209,21 @@ public class StepDefinition {
     @When("the user selects (.*) filters")
     public void selectFilterCategory(String filterType, int numberOfFilters, int numberOfSubfilters) throws IllegalAccessException {
         navigateToAddToBasketPage();
-        if (isFilterSectionPresent()){
-            FilterTypes filterTypes = new FilterTypes();
-            if(filterType.equalsIgnoreCase("multiple")){
-                filterTypes.chooseMultipleFilters();
+        if(!(findElementByXpath("//*[contains(@class,'disabled')]")
+                .getAttribute("class").contains("disabled"))) {
+            if (isFilterSectionPresent()) {
+                FilterTypes filterTypes = new FilterTypes();
+                if (filterType.equalsIgnoreCase("multiple")) {
+                    filterTypes.chooseMultipleFilters();
+                } else
+                    filterTypes.selectChosenFilter(filterType, numberOfFilters, numberOfSubfilters);
+
             }
+        }
             else
-                filterTypes.selectChosenFilter(filterType,numberOfFilters,numberOfSubfilters);
-            //filterTypes.getFilterList();
+                assumeTrue("No filters available to select",false);
+        }
 
-        }//selectFilterType(filterType);
-
-        else
-            assumeTrue("No filters available to select",false);
-    }
 
     @And("the filtered results should display")
     public void checkResultsPage() {
@@ -245,8 +241,8 @@ public class StepDefinition {
            int numberOfFilters = parseInt(list.get(0).get("numberOfFilters"));
            int numberOfSubFilters = parseInt(list.get(0).get("subFilter"));
 
+        waitForAjax(1000);
         navigateToAddToBasketPage();
-
         if (isFilterSectionPresent()) {
             FilterTypes filterTypes = new FilterTypes();
             filterTypes.selectFilter(filterSelection, numberOfFilters, numberOfSubFilters);
@@ -256,9 +252,28 @@ public class StepDefinition {
     private static void navigateToAddToBasketPage() {
         CategoryResultsPage categoryResultsPage = new CategoryResultsPage();
         navigateToProductPage(categoryResultsPage);
-        checkAlertPresentAndDismiss();
         waitForAjax(2000);
     }
 
+    @And("the user adds the product to the compare section")
+    public void addToCompareSection() {
+        waitForAjax(1000);
+        addProductsToCompare(2);
+        clickButton();
+        waitForAjax(1000);
+        checkAddedProducts();
+    }
+
+    @And("the user switched to grid view")
+    public void checkSwitchView() {
+        switchToGridView();
+    }
+
+    @Then("the results should be displayed in a grid")
+    public void checkGridViewResults() {
+        SwitchView switchView = new SwitchView();
+        Assert.assertTrue(checkGridViewDisplayed());
+        Assert.assertTrue(getGridViewResultsDisplay());
+    }
 }
 
