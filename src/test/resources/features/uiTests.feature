@@ -15,8 +15,8 @@ Feature: To test E2E UI tests and filter tests on RS Components website
     And clicks on Checkout securely
     Then the product should appear on the checkout page
 
-  @AddToCompareSection
-  Scenario: To filter by a filter category and add products to compare section
+  @AddToCompareSectionUsingFilters
+  Scenario: To filter by a random category and add products to compare section
     Given the user selects SemiConductors from AllProducts section
     When the user selects filters section
       | filterType | numberOfFilters | subFilter  |
@@ -24,8 +24,8 @@ Feature: To test E2E UI tests and filter tests on RS Components website
       | Random      |   1              | 1         |
     And the user adds the product to the compare section
 
-  @FilterSelection
-  Scenario: To filter by filter category and choose multiple filters
+  @FilterSelectionUsingFilters
+  Scenario: To filter by specific filter category and choose multiple filters
       Given the user selects Connectors from AllProducts section
       When the user selects filters section
          | filterType | numberOfFilters | subFilter  |
@@ -33,8 +33,8 @@ Feature: To test E2E UI tests and filter tests on RS Components website
          | Brand      |   1              | 1         |
         Then the filtered results should display
 
-    @SwitchToGridView
-    Scenario: To filter by filter category and switch to grid view
+    @SwitchToGridViewUsingFilters
+    Scenario: To filter by specific filter category and switch to grid view
       Given the user selects Connectors from AllProducts section
       When the user selects filters section
         | filterType | numberOfFilters | subFilter  |
