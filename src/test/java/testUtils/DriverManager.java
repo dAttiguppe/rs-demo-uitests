@@ -15,14 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
+import static testDataConstants.TestConstants.CHROME_DRIVER_PATH;
 
 public class DriverManager {
     private static WebDriver driver;
-    private static String username = System.getenv("SAUCE_USERNAME");
-    private static String accessKey = System.getenv("SAUCE_ACCESS_KEY");
-    private static String name = System.getenv("JOB_NAME");
-    private static String owner = System.getenv("BUILD_USER");
-    private static String build = System.getenv("BUILD_NUMBER");
     private static DesiredCapabilities caps;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DriverManager.class);
@@ -50,22 +46,12 @@ public class DriverManager {
     }
 
     private static void setImmutableData(DesiredCapabilities caps) {
-        caps.setCapability("username", username);
-        caps.setCapability("accessKey", accessKey);
-        caps.setCapability("name", name);
-        caps.setCapability("build", build);
-        caps.setCapability("owner", owner);
 
     }
 
     private static ChromeDriver createChromeDriver() throws Exception {
-//        WebDriverManager.getInstance(CHROME).setup();
-//        System.setProperty("chrome","C://Program Files (x86)//chromDriver.exe");
-
         WebDriverManager.getInstance(CHROME).setup();
-        //WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver","C:\\Program Files\\chromeDriver\\chromedriver.exe");
-//        driver.get("https://uk.rs-online.com/web/");
+        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         return new ChromeDriver();
     }
 
@@ -73,8 +59,6 @@ public class DriverManager {
         Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.default_content_setting_values.notifications", 2);
         ChromeOptions options = new ChromeOptions();
-        //prefs = {"profile.default_content_setting_values.notifications" : 2}
-        //options.setUnhandledPromptBehaviour("dom.webnotifications.enabled",false);
         options.addArguments("disable-popup-blocking");
         options.addArguments("--disable-notifications");
 
@@ -94,6 +78,5 @@ public class DriverManager {
             embedScreenshot(scenario);
         }
     }
-
 
 }

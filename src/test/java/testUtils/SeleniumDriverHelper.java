@@ -1,7 +1,6 @@
 package testUtils;
 
 import com.google.common.base.Function;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -10,25 +9,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-import static testUtils.ElementHelper.getInnerHtml;
 import static testUtils.ElementHelper.getTextFromElement;
+import static testUtils.SystemPropertyHelper.isTeardown;
 
-//import tc.elements.external.pages.ExternalPage;
-//import test.java.testutils.DriverManager;
+public class SeleniumDriverHelper {
 
-//import static tc.utils.ElementHelper.getInnerHtml;
-//import static tc.utils.ElementHelper.getTextFromElement;
-//import static tc.utils.SystemPropertyHelper.isTeardown;
-
-    public class SeleniumDriverHelper {
-
-        private static String mainWindowHandle;
+    private static String mainWindowHandle;
 
         public static void setMainWindowHandle(String mainWindow) {
             mainWindowHandle = mainWindow;
@@ -90,19 +81,11 @@ import static testUtils.ElementHelper.getTextFromElement;
             waitForAjax(maximumWaitMiliseconds, doubleCheckAjaxRequest);
         }
 
-        public static void clickOnEmptySpace(WebDriver driver) {
-            driver.findElement(By.cssSelector("#masthead-logo")).click();
-            requiredWait(1000);
-        }
 
         public static void scrollToWebElement(WebElement element) {
             if (!element.isDisplayed()) {
                 scroll(element);
             }
-        }
-
-        public static void scrollToElementWithoutCheckingVisibility(WebElement element) {
-            scroll(element);
         }
 
         private static void scroll(WebElement element) {
@@ -135,13 +118,6 @@ import static testUtils.ElementHelper.getTextFromElement;
         public static void switchToWindow(String nameOrHandler) {
             DriverManager.getDriver().switchTo().window(nameOrHandler);
         }
-
-//        public static ExternalPage swtichToExternalPage (HtmlElement element) {
-//            element.click();
-//            Pause.pause(1000);
-//            SeleniumDriverHelper.switchWindow();
-//            return new ExternalPage();
-//        }
 
         public static String getWindowHandle() {
             return DriverManager.getDriver().getWindowHandle();
@@ -212,61 +188,22 @@ import static testUtils.ElementHelper.getTextFromElement;
             return isElementPresent;
         }
 
-        public static WebElement getElementFromListByText(By by, String text) {
-            WebDriver driver = DriverManager.getDriver();
-            List<WebElement> buttons = driver.findElements(by);
-
-            WebElement button = null;
-
-            for (WebElement b : buttons) {
-                if (text.equals(b.getText())) {
-                    button = b;
-                    break;
-                }
-            }
-
-            return button;
+        public static boolean checkIfPopUp(){
+            try
+            {
+                DriverManager.getDriver().switchTo().alert().dismiss();
+                return true;
+            }   // try
+            catch (NoAlertPresentException Ex)
+            {
+                return false;
+            }   // catch
         }
 
-        public static void waitUntilVisibilityOfElementLocatedByCss(String locator) {
-            waitUntilVisibilityOfElementLocated(By.cssSelector(locator));
-        }
 
-        public static boolean isElementVisibleAfterWaitLocatedByCss(String locator) {
-            boolean isElementVisible;
 
-            try {
-                waitUntilVisibilityOfElementLocated(By.cssSelector(locator));
-                isElementVisible = true;
-            } catch (TimeoutException e) {
-                isElementVisible = false;
-            }
 
-            return isElementVisible;
-        }
 
-        public static void waitUntilVisibilityOfElementLocatedByXpath(String locator) {
-            waitUntilVisibilityOfElementLocated(By.xpath(locator));
-        }
-
-        public static void waitUntilVisibilityOfElementLocatedByCss(String locator, long time) {
-            waitUntilVisibilityOfElementLocated(By.cssSelector(locator), time);
-        }
-
-        public static void waitUntilVisibilityOfElementLocatedByCssAndClick(String locator, long time) {
-            waitUntilVisibilityOfElementLocated(By.cssSelector(locator), time);
-            findElement(By.cssSelector(locator)).click();
-        }
-
-        public static void waitUntilVisibilityOfElementLocated(By by) {
-            waitUntilVisibilityOfElementLocated(by, 75);
-        }
-
-        public static void waitUntilVisibilityOfElementLocated(By by, long time) {
-            WebDriver driver = DriverManager.getDriver();
-            new WebDriverWait(driver, time).
-                    until(ExpectedConditions.visibilityOfElementLocated(by));
-        }
 
         public static WebElement waitForElementToBeClickable(By locator) {
             return waitForElementToBeClickable(locator, 20);
@@ -286,9 +223,6 @@ import static testUtils.ElementHelper.getTextFromElement;
             return waitForElementToBeClickable(element, 75);
         }
 
-        public static void waitForElementToBeClickableAndClick(HtmlElement element) {
-            waitForElementToBeClickable(element).click();
-        }
 
         public static void switchToFrameWithNameOrId(String frameNameOrId) {
             WebDriver driver = DriverManager.getDriver();
@@ -366,9 +300,6 @@ import static testUtils.ElementHelper.getTextFromElement;
             return findElements(By.cssSelector(locator));
         }
 
-        public static void findElementByCssAndClick(String locator) {
-            findElementByCss(locator).click();
-        }
 
         public static void findElementByXpathAndClick(String locator) {
             findElementByXpath(locator).click();
@@ -379,23 +310,17 @@ import static testUtils.ElementHelper.getTextFromElement;
             DriverManager.quit();
         }
 
-//        public static void tearDown() {
-//            if (isTeardown()) {
-//                quit();
-//            }
-//        }
+        public static void tearDown() {
+            if (isTeardown()) {
+                quit();
+            }
+        }
 
         public static void initialize() throws Exception {
             if (DriverManager.getDriver() == null) {
                 DriverManager.init();
+          }
 
-
-            }
-
-//            WebDriverManager.getInstance(CHROME).setup();
-//            WebDriver driver = new ChromeDriver();
-//            System.setProperty("webdriver.chrome.driver","C:\\Program Files (x86)\\chromedriver.exe");
-//            driver.get("https://uk.rs-online.com/web/");
         }
 
         public static void getUrl(String url) {
@@ -406,29 +331,11 @@ import static testUtils.ElementHelper.getTextFromElement;
             DriverManager.getDriver().manage().deleteAllCookies();
         }
 
-        public static void deleteTempFolders() {
-            File file = new File(System.getenv("LOCALAPPDATA")+"\\Temp\\");
-            File[] paths = file.listFiles();
-
-            for (File foundFile:paths) {
-                if (foundFile.getName().contains("scoped_dir")) {
-                    try {
-                        FileUtils.deleteDirectory(foundFile);
-                    }
-                    catch (Exception e) {
-                        System.out.println(foundFile+ " not deleted");
-                    }
-                }
-            }
-        }
 
         public static void clickElementUsingJs(WebElement element) {
             runScriptUsingJs("arguments[0].click();", element);
         }
 
-        public static void findElementByCssAndClickUsingJs(String locator) {
-            clickElementUsingJs(findElementByCss(locator));
-        }
 
         public static void findElementByXpathAndClickUsingJs(String locator) {
             waitUntilPresenceOfElementLocatedByXpath(locator, 75);
@@ -444,26 +351,10 @@ import static testUtils.ElementHelper.getTextFromElement;
             runScriptUsingJs("arguments[0].value=arguments[1]", element, value);
         }
 
-        public static String getTitle() {
-            return DriverManager.getDriver().getTitle();
-        }
-
-        public static String getTextByCss(String locator) {
-            waitUntilPresenceOfElementLocatedByCss(locator, 75);
-            return getTextFromElement(findElementByCss(locator));
-        }
 
         public static String getTextByXpath(String locator) {
             waitUntilPresenceOfElementLocatedByXpath(locator, 75);
             return getTextFromElement(findElementByXpath(locator));
-        }
-
-        public static String getInnerHtmlByCss(String locator) {
-            return getInnerHtml(findElementByCss(locator));
-        }
-
-        public static List<WebElement> findElementsByTagName(String locator) {
-            return findElements(By.tagName(locator));
         }
 
         private static void performAction(Action action) {
@@ -476,20 +367,7 @@ import static testUtils.ElementHelper.getTextFromElement;
             return new Actions(DriverManager.getDriver());
         }
 
-        public static void clickAndHoldSendKeys(String text) {
-            performAction(getActions().clickAndHold().release().sendKeys(text).build());
-        }
-
-        public static void clickAndHoldSendKeysDelete() {
-            performAction(getActions().clickAndHold().release().sendKeys(Keys.DELETE).build());
-        }
-
         public static void clickAndHoldSendKeysEnter() {
             performAction(getActions().clickAndHold().release().sendKeys(Keys.ENTER).build());
         }
-
-        public static void clickAndHoldShiftSendKeys(String text) {
-            performAction(getActions().clickAndHold().release().keyDown(Keys.SHIFT).sendKeys(text).build());
-        }
-
     }
