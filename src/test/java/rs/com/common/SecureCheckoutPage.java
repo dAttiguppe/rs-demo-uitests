@@ -8,7 +8,7 @@ import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory
 import testUtils.DriverManager;
 import testUtils.SeleniumDriverHelper;
 
-import static rs.com.testDataConstants.TestConstants.DELIVERY;
+import static rs.com.test_data_constants.TestConstants.DELIVERY;
 
 public class SecureCheckoutPage {
 

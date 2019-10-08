@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
-import static rs.com.testDataConstants.TestConstants.CHROME_DRIVER_PATH;
+import static rs.com.test_data_constants.TestConstants.CHROME_DRIVER_PATH;
 import static testUtils.SeleniumDriverHelper.checkAlertPresentAndDismiss;
 
 public class DriverManager {
