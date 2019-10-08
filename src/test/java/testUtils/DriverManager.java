@@ -2,9 +2,7 @@ package testUtils;
 
 import cucumber.api.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -15,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.bonigarcia.wdm.DriverManagerType.CHROME;
-import static testDataConstants.TestConstants.CHROME_DRIVER_PATH;
+import static rs.com.testDataConstants.TestConstants.CHROME_DRIVER_PATH;
+import static testUtils.SeleniumDriverHelper.checkAlertPresentAndDismiss;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -77,6 +76,11 @@ public class DriverManager {
         if (scenario.isFailed()) {
             embedScreenshot(scenario);
         }
+    }
+
+    public WebElement findElement(By arg0) {
+        checkAlertPresentAndDismiss();
+        return driver.findElement(arg0);
     }
 
 }

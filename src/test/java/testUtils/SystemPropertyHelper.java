@@ -1,7 +1,7 @@
 package testUtils;
 
-import static testDataConstants.TestConstants.TEARDOWN_SYSTEM_PROPERTY_NAME;
-import static testDataConstants.TestConstants.YES;
+import static rs.com.testDataConstants.TestConstants.TEARDOWN_SYSTEM_PROPERTY_NAME;
+import static rs.com.testDataConstants.TestConstants.YES;
 
 public class SystemPropertyHelper {
 
