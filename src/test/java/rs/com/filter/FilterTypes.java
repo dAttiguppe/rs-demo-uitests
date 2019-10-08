@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import rs.com.pages.ProductResultGrid;
-import rs.com.testUtils.DriverManager;
+import rs.com.test_utils.DriverManager;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.element.TextInput;
@@ -22,8 +22,8 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 import static org.junit.Assume.assumeTrue;
 import static org.slf4j.LoggerFactory.getLogger;
-import static rs.com.testUtils.RandomUtil.generateRandomNumInSpecifiedRange;
-import static rs.com.testUtils.SeleniumDriverHelper.*;
+import static rs.com.test_utils.RandomUtil.generateRandomNumInSpecifiedRange;
+import static rs.com.test_utils.SeleniumDriverHelper.*;
 
 public class FilterTypes {
 

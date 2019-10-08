@@ -1,4 +1,4 @@
-package rs.com.testUtils;
+package rs.com.test_utils;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

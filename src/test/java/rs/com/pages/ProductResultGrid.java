@@ -5,15 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import rs.com.testUtils.DriverManager;
+import rs.com.test_utils.DriverManager;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 import java.util.List;
 
-import static rs.com.testUtils.SeleniumDriverHelper.clickElementUsingJs;
-import static rs.com.testUtils.SeleniumDriverHelper.findElementByXpath;
+import static rs.com.test_utils.SeleniumDriverHelper.clickElementUsingJs;
+import static rs.com.test_utils.SeleniumDriverHelper.findElementByXpath;
 
 public class ProductResultGrid {
     private static WebDriver driver;

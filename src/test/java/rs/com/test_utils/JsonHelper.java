@@ -1,4 +1,4 @@
-package rs.com.testUtils;
+package rs.com.test_utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

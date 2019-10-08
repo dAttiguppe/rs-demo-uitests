@@ -1,4 +1,4 @@
-package rs.com.testUtils;
+package rs.com.test_utils;
 
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-import static rs.com.testUtils.SystemPropertyHelper.isTeardown;
+import static rs.com.test_utils.SystemPropertyHelper.isTeardown;
 
 public class SeleniumDriverHelper {
 

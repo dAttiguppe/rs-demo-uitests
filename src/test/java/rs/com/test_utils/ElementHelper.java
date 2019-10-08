@@ -1,4 +1,4 @@
-package rs.com.testUtils;
+package rs.com.test_utils;
 
 import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;

@@ -2,13 +2,13 @@ package rs.com.login;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import rs.com.testUtils.DriverManager;
-import rs.com.testUtils.SeleniumDriverHelper;
+import rs.com.test_utils.DriverManager;
+import rs.com.test_utils.SeleniumDriverHelper;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
-import static rs.com.testUtils.SeleniumDriverHelper.scrollIntoElementUsingJsAndClick;
+import static rs.com.test_utils.SeleniumDriverHelper.scrollIntoElementUsingJsAndClick;
 
 public class GuestLogin {
 

@@ -2,14 +2,14 @@ package rs.com.pages;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import rs.com.testUtils.DriverManager;
+import rs.com.test_utils.DriverManager;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 import static java.lang.Double.parseDouble;
-import static rs.com.testUtils.SeleniumDriverHelper.findElementByXpath;
-import static rs.com.testUtils.SeleniumDriverHelper.waitForAjax;
+import static rs.com.test_utils.SeleniumDriverHelper.findElementByXpath;
+import static rs.com.test_utils.SeleniumDriverHelper.waitForAjax;
 
 public class PayPage {
 

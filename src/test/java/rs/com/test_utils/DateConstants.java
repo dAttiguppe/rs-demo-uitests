@@ -1,4 +1,4 @@
-package rs.com.testUtils;
+package rs.com.test_utils;
 
 import org.joda.time.format.DateTimeFormat;
 

@@ -26,9 +26,9 @@ import rs.com.search_product.PopularProducts;
 import rs.com.search_product.ProductDetailsPage;
 import rs.com.search_product.SearchProduct;
 import rs.com.switch_view.SwitchView;
-import rs.com.testUtils.DriverManager;
-import rs.com.testUtils.JsonHelper;
 import rs.com.test_data_constants.TestConstants;
+import rs.com.test_utils.DriverManager;
+import rs.com.test_utils.JsonHelper;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
@@ -45,10 +45,10 @@ import static rs.com.filter.FilterTypes.isFilterSectionPresent;
 import static rs.com.login.GuestLogin.clickGuestLoginBtn;
 import static rs.com.search_product.PopularProducts.isProductAddedToBasket;
 import static rs.com.switch_view.SwitchView.*;
-import static rs.com.testUtils.DriverManager.embedScreenshot;
-import static rs.com.testUtils.DriverManager.embedScreenshotIfFailed;
-import static rs.com.testUtils.SeleniumDriverHelper.*;
 import static rs.com.test_data_constants.TestConstants.*;
+import static rs.com.test_utils.DriverManager.embedScreenshot;
+import static rs.com.test_utils.DriverManager.embedScreenshotIfFailed;
+import static rs.com.test_utils.SeleniumDriverHelper.*;
 
 public class StepDefinition {
 
