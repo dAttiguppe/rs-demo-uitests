@@ -1,4 +1,4 @@
-package rs.com.switchView;
+package rs.com.switch_view;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

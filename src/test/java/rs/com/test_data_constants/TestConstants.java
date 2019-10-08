@@ -1,4 +1,4 @@
-package rs.com.testDataConstants;
+package rs.com.test_data_constants;
 
 public class TestConstants {
 
