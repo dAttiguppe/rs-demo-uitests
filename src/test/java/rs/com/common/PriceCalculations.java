@@ -2,14 +2,14 @@ package rs.com.common;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import rs.com.testUtils.DriverManager;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
 
 import static java.lang.Double.parseDouble;
-import static testUtils.SeleniumDriverHelper.*;
-import static testUtils.StringUtil.getDoubleFromString;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.StringUtil.getDoubleFromString;
 
 //Price calculation class
 public class PriceCalculations {

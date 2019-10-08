@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import rs.com.common.BreadCrumb;
+import rs.com.testUtils.DriverManager;
+import rs.com.testUtils.SeleniumDriverHelper;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
-import testUtils.SeleniumDriverHelper;
 
 import static org.slf4j.LoggerFactory.getLogger;
-import static testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
 
 public class PrimaryNavContainer {
     private WebDriver driver;

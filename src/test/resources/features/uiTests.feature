@@ -1,5 +1,5 @@
 @UITests
-Feature: To test E2E UI tests and filter tests on RS Components website
+Feature: To test endToend and filter UI tests on RS Components website
 
   @E2ESearchByMenu
   Scenario: To checkout a random product from Main Menu section
@@ -16,7 +16,7 @@ Feature: To test E2E UI tests and filter tests on RS Components website
     Then the product should appear on the checkout page
 
   @FilterTests1 @AddtoComparesection
-  Scenario: To filter by a random category and add products to compare section
+  Scenario: To filter by a random category and add check brand for products to compare section
     Given the user selects SemiConductors from AllProducts section
     When the user selects filters section
       | filterType | numberOfFilters | subFilter  |

@@ -8,17 +8,17 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.com.testUtils.DriverManager;
+import rs.com.testUtils.ElementHelper;
+import rs.com.testUtils.RandomUtil;
+import rs.com.testUtils.SeleniumDriverHelper;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
-import testUtils.ElementHelper;
-import testUtils.RandomUtil;
-import testUtils.SeleniumDriverHelper;
 
 import java.util.List;
 
-import static testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
 
 public class ProductTable {
 

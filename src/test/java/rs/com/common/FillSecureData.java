@@ -5,14 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import rs.com.pojo.SecrurePageData;
+import rs.com.testUtils.DriverManager;
+import rs.com.testUtils.SeleniumDriverHelper;
 import ru.yandex.qatools.htmlelements.element.Select;
 import ru.yandex.qatools.htmlelements.element.TextInput;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
-import testUtils.SeleniumDriverHelper;
 
-import static testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
 
 public class FillSecureData {
     @FindBy(xpath = "//*[contains(@class,'title')]")

@@ -3,13 +3,13 @@ package rs.com.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import rs.com.testUtils.DriverManager;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
 
 import static java.lang.Double.parseDouble;
-import static testUtils.SeleniumDriverHelper.getTextByXpath;
+import static rs.com.testUtils.SeleniumDriverHelper.getTextByXpath;
 
 public class ProductDetails {
 

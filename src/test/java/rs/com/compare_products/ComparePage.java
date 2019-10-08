@@ -3,14 +3,14 @@ package rs.com.compare_products;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import rs.com.testUtils.DriverManager;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
 
 public class ComparePage {
     private WebDriver driver;

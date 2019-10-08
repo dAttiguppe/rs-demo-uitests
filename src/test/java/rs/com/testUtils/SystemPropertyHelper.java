@@ -1,4 +1,4 @@
-package testUtils;
+package rs.com.testUtils;
 
 import static rs.com.test_data_constants.TestConstants.TEARDOWN_SYSTEM_PROPERTY_NAME;
 import static rs.com.test_data_constants.TestConstants.YES;

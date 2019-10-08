@@ -5,15 +5,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rs.com.testUtils.DriverManager;
+import rs.com.testUtils.SeleniumDriverHelper;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
-import testUtils.DriverManager;
-import testUtils.SeleniumDriverHelper;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-import static testUtils.SeleniumDriverHelper.*;
+import static rs.com.testUtils.SeleniumDriverHelper.*;
 
 //Verify Basket
 //Verify the products added to the basket
