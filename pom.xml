@@ -29,7 +29,7 @@
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <javax.mail.version>1.6.1</javax.mail.version>
         <jna.version>4.5.1</jna.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <hsqldb.version>2.4.1</hsqldb.version>
         <sauce_junit.version>2.1.23</sauce_junit.version>
         <htmlunit-driver.version>2.52.0</htmlunit-driver.version>
